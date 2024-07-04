@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>E21FDFA2-7B51-45C8-8CED-065E4D725010</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.2"/>
+        <PackageReference Include="Aspire.Hosting.Redis" Version="8.0.2" />
+        <PackageReference Include="Aspire.Hosting.Orleans" Version="8.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\OrleansPoC.Worker.MarketData\OrleansPoC.Worker.MarketData.csproj" />
+    </ItemGroup>
+
+</Project>
