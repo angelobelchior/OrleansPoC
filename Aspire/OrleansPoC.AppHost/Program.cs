@@ -8,6 +8,11 @@ var orleans = builder.AddOrleans("default")
         .WithMemoryGrainStorage("orleans-storage")
     ;
 
+var server = builder.AddProject<Projects.OrleansPoC_Server>("server")
+        .WithReference(orleans)
+        .WithReplicas(3)
+    ;
+
 var marketData = builder.AddProject<Projects.OrleansPoC_Worker_MarketData>("market-data")
         .WithReference(orleans.AsClient())
     ;
