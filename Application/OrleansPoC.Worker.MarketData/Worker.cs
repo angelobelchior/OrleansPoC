@@ -15,7 +15,7 @@ public class Worker(IClusterClient client, ILogger<Worker> logger)
                 var stock = CreateStock();
                 var grain = client.GetGrain<IStockUpdatedGrain>(stock.Name);
                 await grain.Send(stock.Value);
-                logger.LogInformation("Worker[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
+                logger.LogInformation("Worker.Send[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
                 await Task.Delay(Random.Shared.Next(5), stoppingToken);
             }
             catch (Exception e)

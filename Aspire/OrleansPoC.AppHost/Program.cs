@@ -1,20 +1,25 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var redis = builder.AddRedis("redis");
+var redis = builder.AddRedis("redis")
+                   ;
 
 var orleans = builder.AddOrleans("default")
         .WithClustering(redis)
-        .WithMemoryStreaming("orleans-streaming-provider")
-        .WithMemoryGrainStorage("orleans-storage")
-    ;
+        .WithMemoryStreaming("streaming-provider")
+        .WithMemoryGrainStorage("storage")
+        ;
 
-var server = builder.AddProject<Projects.OrleansPoC_Server>("server")
+builder.AddProject<Projects.OrleansPoC_Server>("silo")
         .WithReference(orleans)
         .WithReplicas(3)
-    ;
+        ;
 
-var marketData = builder.AddProject<Projects.OrleansPoC_Worker_MarketData>("market-data")
+builder.AddProject<Projects.OrleansPoC_WebAPI>("web-api")
         .WithReference(orleans.AsClient())
-    ;
+        .WithExternalHttpEndpoints();
+
+builder.AddProject<Projects.OrleansPoC_Worker_MarketData>("market-data")
+        .WithReference(orleans.AsClient())
+        ;
 
 builder.Build().Run();

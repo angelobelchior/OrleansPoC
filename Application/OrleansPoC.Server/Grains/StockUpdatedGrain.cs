@@ -5,15 +5,16 @@ using OrleansPoC.Contracts.Models;
 
 namespace OrleansPoC.Server.Grains;
 
-public class StockUpdatedGrain(ILogger<StockUpdatedGrain> logger) : Grain, IStockUpdatedGrain
+public class StockUpdatedGrain(ILogger<StockUpdatedGrain> logger) 
+    : Grain, IStockUpdatedGrain
 {
     private IAsyncStream<Stock> _stream = null!;
     public override Task OnActivateAsync(CancellationToken cancellationToken)
     {
         try
         {
-            var streamProvider = this.GetStreamProvider("orleans-streaming-provider");
-            var streamId = StreamId.Create("Stock", "Value");
+            var streamProvider = this.GetStreamProvider("streaming-provider");
+            var streamId = StreamId.Create("Stock", "Updated");
             _stream = streamProvider.GetStream<Stock>(streamId);
         }
         catch (Exception e)
@@ -32,7 +33,7 @@ public class StockUpdatedGrain(ILogger<StockUpdatedGrain> logger) : Grain, IStoc
             Value = value
         };
         
-        logger.LogInformation("Publish[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
+        logger.LogInformation("Server.Send[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
         await _stream.OnNextAsync(stock);
     }
 }

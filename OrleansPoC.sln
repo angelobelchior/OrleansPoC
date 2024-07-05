@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansPoC.Contracts", "App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansPoC.Server", "Application\OrleansPoC.Server\OrleansPoC.Server.csproj", "{675D13EB-6893-48EB-B9B5-8180FED3805F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansPoC.WebAPI", "Application\OrleansPoC.WebAPI\OrleansPoC.WebAPI.csproj", "{ED82134A-6F7B-4F22-9EC5-D50E49E3274A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 		{24CED55B-063F-4887-B1E5-869F7EA1FDBF} = {A8A9AEE0-D14A-415D-BB63-FE0FFFC5D8AF}
 		{E5FE69E1-0226-40A2-AFFC-39AED67F0A62} = {A8A9AEE0-D14A-415D-BB63-FE0FFFC5D8AF}
 		{675D13EB-6893-48EB-B9B5-8180FED3805F} = {A8A9AEE0-D14A-415D-BB63-FE0FFFC5D8AF}
+		{ED82134A-6F7B-4F22-9EC5-D50E49E3274A} = {A8A9AEE0-D14A-415D-BB63-FE0FFFC5D8AF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{45DF52A9-9B9F-46B1-9B3A-EEEDB946F2B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +50,9 @@ Global
 		{675D13EB-6893-48EB-B9B5-8180FED3805F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{675D13EB-6893-48EB-B9B5-8180FED3805F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675D13EB-6893-48EB-B9B5-8180FED3805F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED82134A-6F7B-4F22-9EC5-D50E49E3274A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED82134A-6F7B-4F22-9EC5-D50E49E3274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED82134A-6F7B-4F22-9EC5-D50E49E3274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED82134A-6F7B-4F22-9EC5-D50E49E3274A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
