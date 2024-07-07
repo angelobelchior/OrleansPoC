@@ -13,7 +13,7 @@ public class Worker(IClusterClient client, ILogger<Worker> logger)
             try
             {
                 var stock = CreateStock();
-                var grain = client.GetGrain<IStockUpdatedGrain>(stock.Name);
+                var grain = client.GetGrain<IStockGrain>(stock.Name);
                 await grain.Send(stock.Value);
                 logger.LogInformation("Worker.Send[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
                 await Task.Delay(Random.Shared.Next(5), stoppingToken);

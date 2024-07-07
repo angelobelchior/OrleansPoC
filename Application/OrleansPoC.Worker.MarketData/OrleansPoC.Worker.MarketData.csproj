@@ -12,7 +12,6 @@
         <PackageReference Include="Microsoft.Orleans.Client" Version="8.1.0"/>
         <PackageReference Include="Microsoft.Orleans.Clustering.Redis" Version="8.1.0" />
         <PackageReference Include="Aspire.StackExchange.Redis" Version="8.0.2" />
-        <PackageReference Include="Microsoft.Orleans.Streaming" Version="8.1.0" />
     </ItemGroup>
 
     <ItemGroup>

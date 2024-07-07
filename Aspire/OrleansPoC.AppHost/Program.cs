@@ -5,8 +5,8 @@ var redis = builder.AddRedis("redis")
 
 var orleans = builder.AddOrleans("default")
         .WithClustering(redis)
-        .WithMemoryStreaming("streaming-provider")
-        .WithMemoryGrainStorage("storage")
+        .WithMemoryGrainStorage("stocks")
+        .WithGrainStorage("customers", redis)
         ;
 
 builder.AddProject<Projects.OrleansPoC_Server>("silo")
@@ -16,7 +16,8 @@ builder.AddProject<Projects.OrleansPoC_Server>("silo")
 
 builder.AddProject<Projects.OrleansPoC_WebAPI>("web-api")
         .WithReference(orleans.AsClient())
-        .WithExternalHttpEndpoints();
+        .WithExternalHttpEndpoints()
+        ;
 
 builder.AddProject<Projects.OrleansPoC_Worker_MarketData>("market-data")
         .WithReference(orleans.AsClient())

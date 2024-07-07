@@ -15,5 +15,6 @@ var app = builder.Build();
 app.UseOpenAPI();
 app.UseCors(corsPolicyName);
 
-app.MapSSE();
-await app.RunAsync();
+app.MapSse();
+app.MapCustomers();
+app.Run();

@@ -9,9 +9,8 @@
     <ItemGroup>
         <PackageReference Include="Aspire.StackExchange.Redis" Version="8.0.2" />
         <PackageReference Include="Microsoft.Orleans.Clustering.Redis" Version="8.1.0" />
-        <PackageReference Include="Microsoft.Orleans.Persistence.Redis" Version="8.1.0"/>
+        <PackageReference Include="Microsoft.Orleans.Persistence.Redis" Version="8.1.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="8.1.0"/>
-        <PackageReference Include="Microsoft.Orleans.Streaming" Version="8.1.0" />
         <PackageReference Include="OrleansDashboard" Version="8.0.0" />
     </ItemGroup>
 
