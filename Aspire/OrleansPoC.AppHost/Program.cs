@@ -1,6 +1,6 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var redis = builder.AddRedis("redis")
+var redis = builder.AddRedis("redis", 6379)
                    ;
 
 var orleans = builder.AddOrleans("default")
@@ -14,8 +14,13 @@ builder.AddProject<Projects.OrleansPoC_Server>("silo")
         .WithReplicas(3)
         ;
 
-builder.AddProject<Projects.OrleansPoC_WebAPI>("web-api")
+var webApi = builder.AddProject<Projects.OrleansPoC_WebAPI>("web-api")
         .WithReference(orleans.AsClient())
+        .WithExternalHttpEndpoints()
+        ;
+
+builder.AddProject<Projects.OrleansPoC_UI>("ui")        
+        .WithReference(webApi)
         .WithExternalHttpEndpoints()
         ;
 

@@ -9,5 +9,5 @@ public interface IStockGrain : IGrainWithStringKey
     ValueTask Send(decimal value);
     
     [Alias("Get")]
-    Task<Stock[]> Get(string name);
+    Task<Stock> Get();
 }

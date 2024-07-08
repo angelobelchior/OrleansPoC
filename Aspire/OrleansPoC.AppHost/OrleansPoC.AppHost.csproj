@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Application\OrleansPoC.Server\OrleansPoC.Server.csproj" />
+      <ProjectReference Include="..\..\Application\OrleansPoC.UI\OrleansPoC.UI.csproj" />
       <ProjectReference Include="..\..\Application\OrleansPoC.WebAPI\OrleansPoC.WebAPI.csproj" />
       <ProjectReference Include="..\..\Application\OrleansPoC.Worker.MarketData\OrleansPoC.Worker.MarketData.csproj" />
     </ItemGroup>

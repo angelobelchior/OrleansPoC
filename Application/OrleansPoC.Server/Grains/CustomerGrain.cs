@@ -18,7 +18,7 @@ public class CustomerGrain(
         {
             Id = this.GetPrimaryKey(),
             Name = name,
-            Stocks = stockNames.Select(s => new Stock { Name = s }).ToArray()
+            Stocks = stockNames
         };
         persistent.State = customer;
         await persistent.WriteStateAsync();
@@ -28,14 +28,5 @@ public class CustomerGrain(
     public Task<Customer> Get()
     {
         return Task.FromResult(persistent.State);
-    }
-
-    public async Task<Customer> UpdateStock(string name, decimal value)
-    {
-        var customer = await Get();
-        customer.Stocks.First(s => s.Name == name).Value = value;
-        persistent.State = customer;
-        await persistent.WriteStateAsync();
-        return customer;
     }
 }

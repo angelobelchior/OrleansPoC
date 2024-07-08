@@ -25,11 +25,9 @@ public class StockGrain(
         await persistent.WriteStateAsync();
     }
     
-    public Task<Stock[]> Get(string name)
+    public Task<Stock> Get()
     {
-        //var stocks = persistent.State.Where(s => s.Name == name).ToArray();
-        Stock[] stocks = [persistent.State];
-        logger.LogInformation("Server.Get[{Datetime}] => {Stock}", DateTime.Now, name);
-        return Task.FromResult(stocks);
+        logger.LogInformation("Server.Get[{Datetime}] => {Stock}", DateTime.Now, persistent.State.Name);
+        return Task.FromResult(persistent.State);
     }
 }
