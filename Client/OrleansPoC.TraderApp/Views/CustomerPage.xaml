@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrleansPoC.TraderApp.Views.CustomerPage"
+             xmlns:viewModels="clr-namespace:OrleansPoC.TraderApp.ViewModels"
+             x:DataType="viewModels:CustomerViewModel"
+             Padding="20">
+
+    <VerticalStackLayout>
+        <Label Text="Name" />
+        <Entry Placeholder="Enter your name" 
+               Text="{Binding Name}" />
+        
+        <Label Text="Stocks" />
+        <Entry Placeholder="Enter stock symbols" 
+               Text="{Binding Stocks}" />
+        
+        <Button Text="Submit" 
+                Command="{Binding CreateCustomerCommand}" />
+        
+        <ActivityIndicator IsVisible="{Binding CreateCustomerCommand.IsRunning}" 
+                           IsRunning="{Binding CreateCustomerCommand.IsRunning}" />
+    </VerticalStackLayout>
+    
+</ContentPage>

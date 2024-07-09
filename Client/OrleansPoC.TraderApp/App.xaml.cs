@@ -1,4 +1,6 @@
-﻿namespace OrleansPoC.TraderApp;
+﻿using OrleansPoC.TraderApp.Views;
+
+namespace OrleansPoC.TraderApp;
 
 public partial class App : Application
 {
@@ -6,6 +8,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new AppShell();
+        MainPage = new NavigationPage(new CustomerPage());
     }
 }

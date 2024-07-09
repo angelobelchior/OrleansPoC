@@ -4,6 +4,8 @@ namespace OrleansPoC.TraderApp;
 
 public static class MauiProgram
 {
+    public static readonly string BaseAddress = "http://localhost:5070/";
+    
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
