@@ -26,7 +26,15 @@ public class CustomerGrain(
     }
 
     public Task<Customer> Get()
+        => Task.FromResult(persistent.State);
+
+    public async Task<Customer> Update(string name, string[] stockNames)
     {
-        return Task.FromResult(persistent.State);
+        var customer = await Get();
+        customer.Name = name;
+        customer.Stocks = stockNames;
+        persistent.State = customer;
+        await persistent.WriteStateAsync();
+        return customer;
     }
 }

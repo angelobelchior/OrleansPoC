@@ -19,11 +19,6 @@ var webApi = builder.AddProject<Projects.OrleansPoC_WebAPI>("web-api")
         .WithExternalHttpEndpoints()
         ;
 
-builder.AddProject<Projects.OrleansPoC_UI>("ui")        
-        .WithReference(webApi)
-        .WithExternalHttpEndpoints()
-        ;
-
 builder.AddProject<Projects.OrleansPoC_Worker_MarketData>("market-data")
         .WithReference(orleans.AsClient())
         ;

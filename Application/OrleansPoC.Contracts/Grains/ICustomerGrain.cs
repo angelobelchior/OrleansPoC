@@ -10,4 +10,7 @@ public interface ICustomerGrain : IGrainWithGuidKey
 
     [Alias("Get")]
     Task<Customer> Get();
+    
+    [Alias("Update")]
+    Task<Customer> Update(string name, string[] stockNames);
 }
