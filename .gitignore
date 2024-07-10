@@ -394,6 +394,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.idea/
 
 # Common IntelliJ Platform excludes
 
