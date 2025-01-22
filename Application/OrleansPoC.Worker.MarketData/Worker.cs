@@ -3,7 +3,7 @@ using OrleansPoC.Contracts.Models;
 
 namespace OrleansPoC.Worker.MarketData;
 
-public class Worker(IClusterClient client, ILogger<Worker> logger)
+public class Worker(IClusterClient client)
     : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -15,8 +15,7 @@ public class Worker(IClusterClient client, ILogger<Worker> logger)
                 var stock = CreateStock();
                 var grain = client.GetGrain<IStockGrain>(stock.Name);
                 await grain.Send(stock.Value);
-                logger.LogInformation("Worker.Send[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
-                await Task.Delay(Random.Shared.Next(5), stoppingToken);
+                await Task.Delay(Random.Shared.Next(50), stoppingToken);
             }
             catch (Exception e)
             {
@@ -24,7 +23,7 @@ public class Worker(IClusterClient client, ILogger<Worker> logger)
             }
         }
     }
-    
+
     private static Stock CreateStock()
     {
         var stocks = Stock.GetStockList();

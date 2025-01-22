@@ -1,22 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <ServerGarbageCollection>true</ServerGarbageCollection>
+        <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.StackExchange.Redis" Version="8.0.2" />
-        <PackageReference Include="Microsoft.Orleans.Clustering.Redis" Version="8.1.0" />
-        <PackageReference Include="Microsoft.Orleans.Persistence.Redis" Version="8.1.0" />
-        <PackageReference Include="Microsoft.Orleans.Server" Version="8.1.0"/>
-        <PackageReference Include="OrleansDashboard" Version="8.0.0" />
+        <PackageReference Include="Aspire.StackExchange.Redis" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.Orleans.Clustering.Redis" Version="9.0.1"/>
+        <PackageReference Include="Microsoft.Orleans.Persistence.Redis" Version="9.0.1"/>
+        <PackageReference Include="Microsoft.Orleans.Server" Version="9.0.1"/>
+        <PackageReference Include="OrleansDashboard" Version="8.2.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Aspire\OrleansPoC.ServiceDefaults\OrleansPoC.ServiceDefaults.csproj" />
-      <ProjectReference Include="..\OrleansPoC.Contracts\OrleansPoC.Contracts.csproj" />
+        <ProjectReference Include="..\..\Aspire\OrleansPoC.ServiceDefaults\OrleansPoC.ServiceDefaults.csproj"/>
+        <ProjectReference Include="..\OrleansPoC.Contracts\OrleansPoC.Contracts.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -9,8 +9,5 @@ public interface ICustomerGrain : IGrainWithGuidKey
     Task<Customer> Create(string name, string[] stockNames);
 
     [Alias("Get")]
-    Task<Customer> Get();
-    
-    [Alias("Update")]
-    Task<Customer> Update(string name, string[] stockNames);
+    Task<Customer?> Get();
 }
