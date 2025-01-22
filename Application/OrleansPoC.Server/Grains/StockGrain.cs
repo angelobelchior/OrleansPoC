@@ -1,18 +1,14 @@
-using System.Collections.Concurrent;
-using Orleans.Runtime;
 using OrleansPoC.Contracts.Grains;
 using OrleansPoC.Contracts.Models;
 
 namespace OrleansPoC.Server.Grains;
 
 public class StockGrain(
-    ILogger<StockGrain> logger,
-    [PersistentState(
-        stateName: "stocks",
-        storageName: "stocks")]
-    IPersistentState<Stock> persistent) 
+    ILogger<StockGrain> logger)
     : Grain, IStockGrain
 {
+    private readonly HashSet<IConsumerObserver> _observers = new();
+
     public async ValueTask Send(decimal value)
     {
         var stock = new Stock
@@ -20,14 +16,14 @@ public class StockGrain(
             Name = this.GetPrimaryKeyString(),
             Value = value
         };
-        logger.LogInformation("Server.Send[{Datetime}] => {Stock}:{Value}", DateTime.Now, stock.Name, stock.Value);
-        persistent.State = stock;
-        await persistent.WriteStateAsync();
+
+        foreach (var consumerObserver in _observers)
+            await consumerObserver.OnStockUpdated(stock);
     }
-    
-    public Task<Stock> Get()
-    {
-        logger.LogInformation("Server.Get[{Datetime}] => {Stock}", DateTime.Now, persistent.State.Name);
-        return Task.FromResult(persistent.State);
-    }
+
+    public void Subscribe(IConsumerObserver observer)
+        => _observers.Add(observer);
+
+    public void Unsubscribe(IConsumerObserver observer)
+        => _observers.Remove(observer);
 }

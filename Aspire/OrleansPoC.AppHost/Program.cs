@@ -1,17 +1,19 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 var redis = builder.AddRedis("redis", 6379)
+                   .WithRedisInsight()
                    ;
 
 var orleans = builder.AddOrleans("default")
         .WithClustering(redis)
         .WithMemoryGrainStorage("stocks")
-        .WithGrainStorage("customers", redis)
+        .WithMemoryGrainStorage("customers")
+        //.WithGrainStorage("customers", redis)
         ;
 
 builder.AddProject<Projects.OrleansPoC_Server>("silo")
-        .WithReference(orleans)
         .WithReplicas(3)
+        .WithReference(orleans)
         ;
 
 var webApi = builder.AddProject<Projects.OrleansPoC_WebAPI>("web-api")
