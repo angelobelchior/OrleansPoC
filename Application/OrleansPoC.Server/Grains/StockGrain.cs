@@ -7,23 +7,34 @@ public class StockGrain(
     ILogger<StockGrain> logger)
     : Grain, IStockGrain
 {
-    private readonly HashSet<IConsumerObserver> _observers = new();
+    private readonly HashSet<IStockObserver> _observers = new();
 
-    public async ValueTask Send(decimal value)
+    public async ValueTask Update(Stock stock)
     {
-        var stock = new Stock
+        foreach (var observer in _observers)
         {
-            Name = this.GetPrimaryKeyString(),
-            Value = value
-        };
-
-        foreach (var consumerObserver in _observers)
-            await consumerObserver.OnStockUpdated(stock);
+            try
+            {
+                await observer.OnStockUpdated(stock);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
     }
 
-    public void Subscribe(IConsumerObserver observer)
+    public void Subscribe(IStockObserver observer)
         => _observers.Add(observer);
 
-    public void Unsubscribe(IConsumerObserver observer)
+    public void Unsubscribe(IStockObserver observer)
         => _observers.Remove(observer);
+
+    public override Task OnDeactivateAsync(DeactivationReason reason, CancellationToken cancellationToken)
+    {
+        if (reason.ReasonCode == DeactivationReasonCode.ShuttingDown)
+            MigrateOnIdle();
+
+        return base.OnDeactivateAsync(reason, cancellationToken);
+    }
 }

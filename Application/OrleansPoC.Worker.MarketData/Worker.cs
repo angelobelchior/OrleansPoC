@@ -12,10 +12,26 @@ public class Worker(IClusterClient client)
         {
             try
             {
-                var stock = CreateStock();
-                var grain = client.GetGrain<IStockGrain>(stock.Name);
-                await grain.Send(stock.Value);
-                await Task.Delay(Random.Shared.Next(50), stoppingToken);
+                var stocks = CreateStocks();
+                var chunkedStocks = stocks.Chunk(stocks.Count / Environment.ProcessorCount);
+
+                foreach (var chunkedStock in chunkedStocks)
+                {
+                    await Parallel.ForEachAsync(chunkedStock, parallelOptions: new ParallelOptions()
+                    {
+                        CancellationToken = stoppingToken,
+                        MaxDegreeOfParallelism = Environment.ProcessorCount / 2,
+                        TaskScheduler = TaskScheduler.Default
+                    
+                    }, async (stock, token) =>
+                    {
+                        var grain = client.GetGrain<IStockGrain>(stock.Name);
+                        await grain.Update(stock);
+                    });
+                }
+                
+                // Regula o "throughput"...
+                await Task.Delay(Random.Shared.Next(250), stoppingToken);
             }
             catch (Exception e)
             {
@@ -24,13 +40,24 @@ public class Worker(IClusterClient client)
         }
     }
 
-    private static Stock CreateStock()
+    private static IReadOnlyCollection<Stock> CreateStocks()
     {
-        var stocks = Stock.GetStockList();
-        return new Stock
+        var stockNames = Stock.GetStockNameList();
+        var stocks = new List<Stock>();
+
+        foreach (var stockName in stockNames)
         {
-            Name = stocks[Random.Shared.Next(stocks.Length)],
-            Value = (decimal)(Random.Shared.NextDouble() * 100)
-        };
+            stocks.Add(new Stock
+            {
+                Name = stockName,
+                DateTime = DateTime.Now,
+                Value = (decimal)(Random.Shared.NextDouble() * 100),
+                Trades = Random.Shared.Next(15),
+                Volume = Random.Shared.Next(10),
+                TransactionType = Random.Shared.Next(2) == 0 ? TransactionType.Buy : TransactionType.Sell
+            });
+        }
+
+        return stocks;
     }
 }

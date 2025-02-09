@@ -1,15 +1,10 @@
-using System;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-using OrleansPoC.UI.ViewModels;
-
 namespace OrleansPoC.UI.Views;
 
-public partial class StocksView : UserControl
+public partial class BookView : UserControl
 {
-    public StocksViewModel? ViewModel { get; set; }
+    public BookViewModel? ViewModel { get; set; }
 
-    public StocksView()
+    public BookView()
     {
         InitializeComponent();
     }
