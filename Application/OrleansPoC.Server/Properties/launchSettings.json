@@ -4,11 +4,49 @@
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5292",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "orleans_test": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5292",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:62658",
+        "ConnectionStrings__redis": "localhost:6379",
+        "DOTNET_LAUNCH_PROFILE": "orleans_test",
+        "DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION": "true",
+        "LOGGING__CONSOLE__FORMATTERNAME": "simple",
+        "OTEL_BLRP_SCHEDULE_DELAY": "1000",
+        "OTEL_BSP_SCHEDULE_DELAY": "1000",
+        "OTEL_DOTNET_EXPERIMENTAL_ASPNETCORE_DISABLE_URL_QUERY_REDACTION": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_HTTPCLIENT_DISABLE_URL_QUERY_REDACTION": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:19291",
+        "OTEL_EXPORTER_OTLP_HEADERS": "x-otlp-api-key=642213dd7c2ddc41a8c87fa39d76c307",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
+        "OTEL_METRICS_EXEMPLAR_FILTER": "trace_based",
+        "OTEL_METRIC_EXPORT_INTERVAL": "1000",
+        "TEL_RESOURCE_ATTRIBUTES": "service.instance.id=gcubtxcj",
+        "OTEL_SERVICE_NAME": "cluster",
+        "OTEL_TRACES_SAMPLER": "always_on",
+        "Orleans__ClusterId": "dzymkdywdu2g8fvh8d81w79bf",
+        "Orleans__Clustering__ProviderType": "Redis",
+        "Orleans__Clustering__ServiceKey": "redis",
+        "Orleans__EnableDistributedTracing": "true",
+        "Orleans__Endpoints__GatewayPort": "62650",
+        "Orleans__Endpoints__SiloPort": "62651",
+        "Orleans__GrainStorage__customers__ProviderType": "Redis",
+        "Orleans__GrainStorage__customers__ServiceKey": "redis",
+        "Orleans__GrainStorage__stocks__ProviderType": "Memory",
+        "Orleans__ServiceId": "3rrecq416tkwamcb3pspybc1f"
       }
     }
   }
