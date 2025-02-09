@@ -14,8 +14,8 @@ public partial class Book(string name) : ObservableObject
     [ObservableProperty] private decimal _high;
     [ObservableProperty] private decimal _low;
 
-    public LimitedObservableCollection<Stock> Buy { get; set; } = [];
-    public LimitedObservableCollection<Stock> Sell { get; set; } = [];
+    public LimitedObservableCollection<Stock> Buy { get; set; } = new(12);
+    public LimitedObservableCollection<Stock> Sell { get; set; } = new(12);
 
 
     public void AddStock(Stock stock)

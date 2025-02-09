@@ -15,7 +15,7 @@ var orleans = builder.AddOrleans("default")
 
 var silo = builder.AddProject<Projects.OrleansPoC_Server>("cluster")
         .WaitFor(redis)
-        .WithReplicas(1)
+        .WithReplicas(3)
         .WithReference(orleans)
     ;
 
