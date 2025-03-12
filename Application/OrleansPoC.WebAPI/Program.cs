@@ -17,3 +17,4 @@ app.UseCors(corsPolicyName);
 
 app.MapCustomers();
 app.Run();
+
