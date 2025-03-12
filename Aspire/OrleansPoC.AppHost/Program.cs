@@ -13,7 +13,7 @@ var orleans = builder.AddOrleans("default")
         .WithGrainStorage("customers", redis)
     ;
 
-var silo = builder.AddProject<Projects.OrleansPoC_Server>("cluster")
+var silo = builder.AddProject<Projects.OrleansPoC_Server>("silos")
         .WaitFor(redis)
         .WithReplicas(3)
         .WithReference(orleans)

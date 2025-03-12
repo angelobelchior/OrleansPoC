@@ -3,8 +3,7 @@ using OrleansPoC.Contracts.Models;
 
 namespace OrleansPoC.Server.Grains;
 
-public class StockGrain(
-    ILogger<StockGrain> logger)
+public class StockGrain
     : Grain, IStockGrain
 {
     private readonly HashSet<IStockObserver> _observers = new();
